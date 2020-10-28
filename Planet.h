@@ -5,6 +5,6 @@ class Planet {
 public:
     void update();
     void draw();
-}
+};
 
 #endif // Planet_h

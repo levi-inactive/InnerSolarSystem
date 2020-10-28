@@ -5,6 +5,6 @@
 
 class SpaceShip : public Drawable {
 
-}
+};
 
 #endif // SpaceShip_h

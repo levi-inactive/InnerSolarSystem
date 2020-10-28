@@ -3,6 +3,6 @@
 
 class Math3D {
 
-}
+};
 
 #endif // Math3D_h

@@ -3,6 +3,6 @@
 
 class Matrix {
 
-}
+};
 
 #endif // Matrix_h

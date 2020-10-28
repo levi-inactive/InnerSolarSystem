@@ -5,6 +5,6 @@
 
 class Venus : public Planet {
 
-}
+};
 
 #endif // Venus_h

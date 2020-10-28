@@ -5,6 +5,6 @@
 
 class Mars : public Planet {
 
-}
+};
 
 #endif // Mars_h

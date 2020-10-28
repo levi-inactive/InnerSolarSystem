@@ -5,6 +5,6 @@
 
 class Satellite : public Drawable {
 
-}
+};
 
 #endif // Satellite_h

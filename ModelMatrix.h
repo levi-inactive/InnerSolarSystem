@@ -3,6 +3,6 @@
 
 class ModelMatrix {
 
-}
+};
 
 #endif // ModelMatrix_h

@@ -3,6 +3,6 @@
 
 class Drawable {
 
-}
+};
 
 #endif // Drawable_h

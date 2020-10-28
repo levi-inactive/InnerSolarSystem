@@ -5,6 +5,6 @@
 
 class AsteroidBelt : public Planet {
 
-}
+};
 
 #endif // AsteroidBelt_h

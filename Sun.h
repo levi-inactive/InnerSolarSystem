@@ -5,6 +5,6 @@
 
 class Sun : public Planet {
 
-}
+};
 
 #endif // Sun_h

@@ -5,6 +5,6 @@
 
 class Mercury : public Planet {
 
-}
+};
 
 #endif // Mercury_h

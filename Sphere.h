@@ -5,6 +5,6 @@
 
 class Sphere : public Drawable {
 
-}
+};
 
 #endif // Sphere_h

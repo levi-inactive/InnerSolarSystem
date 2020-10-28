@@ -5,6 +5,6 @@
 
 class Earth : public Planet {
 
-}
+};
 
 #endif // Earth_h
