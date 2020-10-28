@@ -12,7 +12,12 @@
 
 #include <stdlib.h>
 
+#include "Scene.h"
+
 int main(int argc, char *argv[])
 {
+    Scene scene;
+    scene.loop();
+
     return EXIT_SUCCESS;
 }
