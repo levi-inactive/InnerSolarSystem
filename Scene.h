@@ -10,13 +10,14 @@
 
 class Scene {
 private:
-    int windowWidth=640, windowHeight=480;
+    int windowWidth=500, windowHeight=500;
     int windowX=10, windowY=10;
     char* windowTitle="Proyecto Parcial 2";
 
-    void resize(int, int);
-    void display(void);
-    void idle(void);
+    void init();
+    void drawAxis();
+    void display();
+    void idle();
 public:
     Scene();
     Scene(int, int, int, int, char*);

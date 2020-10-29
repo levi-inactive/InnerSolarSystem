@@ -4,7 +4,8 @@
 #include "Drawable.h"
 
 class Sphere : public Drawable {
-
+public:
+    void draw();
 };
 
 #endif // Sphere_h

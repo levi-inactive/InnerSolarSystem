@@ -1,40 +1,57 @@
 #include "Scene.h"
 
+#include "Sphere.h"
+
 /********************
  * private:
  ********************/
 
-void Scene::resize(int width, int height) {
-    const float ar = (float) width / (float) height;
-
-    glViewport(0, 0, width, height);
+void Scene::init() {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glFrustum(-ar, ar, -1.0, 1.0, 2.0, 100.0);
-
+    glOrtho(-4, 4, -4, 4, -4, 4);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
+    gluLookAt(1, 1, 1, 0, 0, 0, 0, 1, 0);
+    glClearColor(0, 0, 0, 0);
 }
 
-void Scene::display(void) {
-    const double t = glutGet(GLUT_ELAPSED_TIME) / 1000.0;
-    const double a = t*90.0;
+void Scene::display() {
+    glClear(GL_COLOR_BUFFER_BIT);
+    drawAxis();
+    glFlush();
 
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glColor3d(1,0,0);
-
-    glPushMatrix();
-        glTranslated(0,0,-6);
-        glRotated(60,1,0,0);
-        glRotated(a,0,0,1);
-        glutWireSphere(1, 16, 16);
-    glPopMatrix();
+    Sphere sphere;
+    sphere.draw();
 
     glutSwapBuffers();
 }
 
-void Scene::idle(void) {
+void Scene::idle() {
     glutPostRedisplay();
+}
+
+void Scene::drawAxis() {
+    // X axis in red.
+    glColor3f(1.0f,0.0f,0.0f);
+    glBegin(GL_LINES);
+        glVertex3f(-3.0,0.0,0.0);
+        glVertex3f(3.0,0.0,0.0);
+    glEnd();
+
+    // Y axis in green.
+    glColor3f(0.0f,1.0f,0.0f);
+    glBegin(GL_LINES);
+        glVertex3f(0.0,-3.0,0.0);
+        glVertex3f(0.0,3.0,0.0);
+    glEnd();
+
+    // Z axis in yellow.
+    glColor3f(1.0f,1.0f,0.0f);
+    glBegin(GL_LINES);
+        glVertex3f(0.0,0.0,-3.0);
+        glVertex3f(0.0,0.0,3.0);
+    glEnd();
 }
 
 /********************
@@ -44,6 +61,7 @@ void Scene::idle(void) {
 Scene::Scene() {
     int argc = 0;
     char* argv[] = {};
+    
     glutInit(&argc, argv);
     glutInitWindowSize(windowWidth, windowHeight);
     glutInitWindowPosition(windowX, windowY);
@@ -51,7 +69,8 @@ Scene::Scene() {
 
     glutCreateWindow(windowTitle);
 
-    glutReshapeFunc((void(*)(int, int)) &resize);
+    init();
+
     glutDisplayFunc((void(*)()) &display);
     glutIdleFunc((void(*)()) &idle);
 }
@@ -59,6 +78,7 @@ Scene::Scene() {
 Scene::Scene(int width, int height, int x, int y, char* title) {
     int argc = 0;
     char* argv[] = {};
+    
     glutInit(&argc, argv);
     glutInitWindowSize(width, height);
     glutInitWindowPosition(x, y);
@@ -66,7 +86,8 @@ Scene::Scene(int width, int height, int x, int y, char* title) {
 
     glutCreateWindow(title);
 
-    glutReshapeFunc((void(*)(int, int)) &resize);
+    init();
+
     glutDisplayFunc((void(*)()) &display);
     glutIdleFunc((void(*)()) &idle);
 }

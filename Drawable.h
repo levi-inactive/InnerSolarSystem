@@ -8,9 +8,11 @@
 
 #include "Point.h";
 
+#include <cmath>
+
 class Drawable {
 private:
-    std::vector<point> pointVector;
+    std::vector<Point> pointVector;
 
     void bresenham(Point, Point);
 
