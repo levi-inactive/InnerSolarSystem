@@ -5,6 +5,17 @@
 #include <stdio.h>
 #include <math.h>
 #include <time.h>
+#include <time.h>
+
+#include <stack>
+#include <iostream>
+
+using namespace std;
+
+class Matrix{
+public:
+    float M[4][4];
+};
 
 class Math3D {
 
