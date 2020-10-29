@@ -12,46 +12,55 @@
 
 using namespace std;
 
-class Matrix{
+class Matrix {
 public:
     float M[4][4];
 };
 
 class Math3D {
+private:
+    /* Variables para matrices de traslaci贸n, rotacion y escalamiento. */
+    float T[4][4], R[4][4], E[4][4], A[4][4];
+    Matrix matrix;
 
-    public:
+    /* Pila para el manejo de estados */
+    stack<Matrix> matrixStack;
 
-        Math3D();
+public:
+    Math3D();
+    ~Math3D();
 
-        //Variables para matrices de rotacion, traslaci髇 y escalamiento
-        float T[4][4], R[4][4], E[4][4], A[4][4];
+    /* Carga la matriz identidad en la matriz que se recibe como parametro. */
+    void loadIdentity(float M[][4]);
 
-        //Funcion para cargar la matriz identidad en la matriz que se recibe como parametro
-        void LoadIdentity(float M[][4]);
+    /* Carga el vector de traslacion en la matriz T. */
+    void translate(float x, float y, float z);
+    
+    /* Carga la matriz de escala en la matriz E. */
+    void scale(float x, float y, float z);
 
-        //Funcion que carga la matriz de escala en la matriz E
-        void scale(float x, float y, float z);
+    /* Carga la matriz de rotaci贸n sobre el eje X en la matriz R. */
+    void rotateX(float theta);
 
-        //Funcion que carga el vector de traslacion en la matriz T
-        void translate(float x, float y, float z);
+    /* Carga la matriz de rotaci贸n sobre el eje Y en la matriz R. */
+    void rotateY(float theta);
 
-        //Pila para el manejo de estados
-        stack<Matrix*> mystack;
+    /* Carga la matriz de rotaci贸n sobre el eje Z en la matriz R. */
+    void rotateZ(float theta);
 
-        //Funcion que multiplica la matriz M1 con la matriz M2, donde el resultado es Res
-        void MultM(float M1[][4], float M2[][4], float Res[][4]);
+    /* Multiplica la matriz inputMatrix con la matriz matrix.M. */
+    void operate(float inputMatrix[][4]);
 
-        //multiplica la matriz m por el punto p y regresa el resultado en el punto p
-        void MatPoint(float m[][4], float p[3]);
+    /* Multiplica la matriz M por el punto p y regresa el resultado en el punto p. */
+    void MatPoint(float M[][4], float p[3]);
 
-        //multiplica la matriz m por cada punto del objeto definido por la matriz p de size x 3
-        void MatObject(float m[][4], int size, float p[][3]);
+    /* Multiplica la matriz M por cada punto del objeto definido por la matriz p de size x 3. */
+    void MatObject(float M[][4], int size, float p[][3]);
 
-        void push();
-        void pop();
+    void pushMatrix();
+    void popMatrix();
 
-
-
+    void printCurrentMatrix();
 };
 
 #endif // Math3D_h
