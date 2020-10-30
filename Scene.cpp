@@ -1,6 +1,7 @@
 #include "Scene.h"
 
 #include "Sphere.h"
+#include "Pyramid.h"
 
 /********************
  * private:
@@ -21,8 +22,11 @@ void Scene::display() {
     drawAxis();
     glFlush();
 
-    Sphere sphere;
-    sphere.draw();
+    /*Sphere sphere;
+    sphere.draw();*/
+
+    Pyramid pyramid;
+    pyramid.draw();
 
     glutSwapBuffers();
 }
@@ -61,7 +65,7 @@ void Scene::drawAxis() {
 Scene::Scene() {
     int argc = 0;
     char* argv[] = {};
-    
+
     glutInit(&argc, argv);
     glutInitWindowSize(windowWidth, windowHeight);
     glutInitWindowPosition(windowX, windowY);
@@ -78,7 +82,7 @@ Scene::Scene() {
 Scene::Scene(int width, int height, int x, int y, char* title) {
     int argc = 0;
     char* argv[] = {};
-    
+
     glutInit(&argc, argv);
     glutInitWindowSize(width, height);
     glutInitWindowPosition(x, y);
