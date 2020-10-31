@@ -1,6 +1,7 @@
 #include "Scene.h"
 
 #include "Sphere.h"
+#include "Pyramid.h"
 
 /********************
  * private:
@@ -61,6 +62,11 @@ void Scene::display() {
         model.pop();
 
     model.pop();
+    /*Sphere sphere;
+    sphere.draw();*/
+
+    Pyramid pyramid;
+    pyramid.draw();
 
     glutSwapBuffers();
 }
