@@ -3,23 +3,23 @@
 Math3D::Math3D() {
   loadIdentity(matrix.M);
 }
+
 Math3D::~Math3D() {}
 
-void Math3D::loadIdentity(float M[][4])
-{
+void Math3D::loadIdentity(float M[][4]) {
   int i, j;
-  for(i = 0; i < 4; i++) {
-    for(j = 0; j < 4; j++) {
-      if(i == j)
+  for (i = 0; i < 4; i++) {
+    for (j = 0; j < 4; j++) {
+      if (i == j) {
         M[i][j]=1;
-      else
+      } else {
         M[i][j]=0;
+      }
     }
   }
 }
 
-void Math3D::translate(float x, float y, float z)
-{
+void Math3D::translate(float x, float y, float z) {
   loadIdentity(T);
   T[0][3] = x;
   T[1][3] = y;
@@ -27,8 +27,7 @@ void Math3D::translate(float x, float y, float z)
   operate(T);
 }
 
-void Math3D::scale(float x, float y, float z)
-{
+void Math3D::scale(float x, float y, float z) {
   loadIdentity(E);
   E[0][0] = x;
   E[1][1] = y;
@@ -63,8 +62,7 @@ void Math3D::rotateZ(float theta) {
   operate(R);
 }
 
-void Math3D::operate(float inputMatrix[][4])
-{
+void Math3D::operate(float inputMatrix[][4]) {
   float tmp[4][4];
   int i, j, k;
 
@@ -84,8 +82,7 @@ void Math3D::operate(float inputMatrix[][4])
   }
 }
 
-void Math3D::MatPoint(float M[][4], float p[3])
-{
+void Math3D::MatPoint(float M[][4], float p[3]) {
   float tmp[4];
   int i, j;
   
@@ -103,22 +100,27 @@ void Math3D::MatPoint(float M[][4], float p[3])
 }
 
 //Multiplica la matriz m por cada punto del objeto definido por la matriz p de size x 3
-void Math3D::MatObject(float M[][4], int size, float p[][3])
-{
+void Math3D::MatObject(float M[][4], int size, float p[][3]) {
   int i;
   for(i = 0; i < size; i++) {
     MatPoint(M, p[i]);
   }
 }
 
-void Math3D::pushMatrix() {
+void Math3D::push() {
   matrixStack.push(matrix);
 }
 
-void Math3D::popMatrix() {
+void Math3D::pop() {
+  matrix = matrixStack.top();
   matrixStack.pop();
 }
 
-void Math3D::printCurrentMatrix() {
-
+void Math3D::print() {
+  for (unsigned int i = 0; i < ROWS; i++) {
+    for (unsigned int j = 0; j < COLS; j++) {
+      std::cout << matrix.M[i][j] << " ";
+    }
+    std::cout << "\n";
+  }
 }

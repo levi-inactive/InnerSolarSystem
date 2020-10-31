@@ -5,6 +5,7 @@
 
 class Sphere : public Drawable {
 public:
+    Sphere(Math3D*);
     void draw();
 };
 

@@ -17,12 +17,50 @@ void Scene::init() {
 }
 
 void Scene::display() {
+    Math3D model;
+
     glClear(GL_COLOR_BUFFER_BIT);
     drawAxis();
     glFlush();
 
-    Sphere sphere;
-    sphere.draw();
+    model.push();
+        glColor3f(1.0, 0.5, 0.0);
+        Sphere sun(&model);
+        sun.draw();
+
+        model.push();
+            model.translate(2, 0, 0);
+            model.scale(0.4, 0.4, 0.4);
+            glColor3f(1.0, 0.5, 0.5);
+            Sphere mercury(&model);
+            mercury.draw();
+        model.pop();
+
+        model.push();
+            model.translate(3, 0, 0);
+            model.scale(0.4, 0.4, 0.4);
+            glColor3f(1.0, 1.0, 0.5);
+            Sphere venus(&model);
+            venus.draw();
+        model.pop();
+
+        model.push();
+            model.translate(4, 0, 0);
+            model.scale(0.5, 0.5, 0.5);
+            glColor3f(0.0, 0.2, 1.0);
+            Sphere earth(&model);
+            earth.draw();
+
+            model.push();
+                model.translate(1, 0, 0);
+                model.scale(0.5, 0.5, 0.5);
+                glColor3f(1.0, 1.0, 1.0);
+                Sphere moon(&model);
+                moon.draw();
+            model.pop();
+        model.pop();
+
+    model.pop();
 
     glutSwapBuffers();
 }
@@ -61,7 +99,7 @@ void Scene::drawAxis() {
 Scene::Scene() {
     int argc = 0;
     char* argv[] = {};
-    
+
     glutInit(&argc, argv);
     glutInitWindowSize(windowWidth, windowHeight);
     glutInitWindowPosition(windowX, windowY);
@@ -78,7 +116,7 @@ Scene::Scene() {
 Scene::Scene(int width, int height, int x, int y, char* title) {
     int argc = 0;
     char* argv[] = {};
-    
+
     glutInit(&argc, argv);
     glutInitWindowSize(width, height);
     glutInitWindowPosition(x, y);

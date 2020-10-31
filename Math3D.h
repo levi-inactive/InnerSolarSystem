@@ -10,23 +10,22 @@
 #include <stack>
 #include <iostream>
 
+#include "Matrix.h"
+
 using namespace std;
 
-class Matrix {
-public:
-    float M[4][4];
-};
+#define ROWS 4
+#define COLS 4
 
 class Math3D {
-private:
+public:
     /* Variables para matrices de traslación, rotacion y escalamiento. */
-    float T[4][4], R[4][4], E[4][4], A[4][4];
+    float T[ROWS][COLS], R[ROWS][COLS], E[ROWS][COLS], A[ROWS][COLS];
     Matrix matrix;
 
     /* Pila para el manejo de estados */
     stack<Matrix> matrixStack;
 
-public:
     Math3D();
     ~Math3D();
 
@@ -35,7 +34,7 @@ public:
 
     /* Carga el vector de traslacion en la matriz T. */
     void translate(float x, float y, float z);
-    
+
     /* Carga la matriz de escala en la matriz E. */
     void scale(float x, float y, float z);
 
@@ -57,10 +56,10 @@ public:
     /* Multiplica la matriz M por cada punto del objeto definido por la matriz p de size x 3. */
     void MatObject(float M[][4], int size, float p[][3]);
 
-    void pushMatrix();
-    void popMatrix();
+    void push();
+    void pop();
 
-    void printCurrentMatrix();
+    void print();
 };
 
 #endif // Math3D_h
