@@ -2,41 +2,21 @@
 
 Point::Point() {}
 
-Point::Point(int _x, int _y, int _z) {
+Point::Point(float _x, float _y, float _z) {
     x = _x;
     y = _y;
     z = _z;
+}
+
+Point::Point(float _x, float _y, float _z, float _a) {
+    x = _x;
+    y = _y;
+    z = _z;
+    a = _a;
 }
 
 Point::~Point() {}
 
-
-void Point::setX(int _x) {
-    x = _x;
-}
-
-int Point::getX() {
-    return x;
-}
-
-void Point::setY(int _y) {
-    y = _y;
-}
-
-int Point::getY() {
-    return y;
-}
-
-void Point::setZ(int _z) {
-    z = _z;
-}
-
-int Point::getZ() {
-    return z;
-}
-
-
 void Point::print() {
-    std::cout << "(" << x << ", " << y << ", " << z << ")\n";
+    std::cout << "(" << x << ", " << y << ", " << z << ", " << a << ")\n";
 }
-

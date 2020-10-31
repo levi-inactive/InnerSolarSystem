@@ -4,22 +4,16 @@
 #include <iostream>
 
 class Point {
-private:
-    int x;
-    int y;
-    int z;
-
 public:
-    Point();
-    Point(int, int, int);
-    ~Point();
+    float x;
+    float y;
+    float z;
+    float a = 1;
 
-    void setX(int);
-    int getX();
-    void setY(int);
-    int getY();
-    void setZ(int);
-    int getZ();
+    Point();
+    Point(float, float, float);
+    Point(float, float, float, float);
+    ~Point();
 
     void print();
 };
