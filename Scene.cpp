@@ -59,14 +59,26 @@ void Scene::display() {
                 Sphere moon(&model);
                 moon.draw();
             model.pop();
+
+
+            model.push();
+                model.translate(1, 0, 0);
+                model.rotateX(60);
+                glColor3f(1.0, 1.0, 0.5);
+                Pyramid py(&model);
+                py.draw();
+            model.pop();
+
+
         model.pop();
 
     model.pop();
+
     /*Sphere sphere;
     sphere.draw();*/
 
-    Pyramid pyramid;
-    pyramid.draw();
+    /*Pyramid pyramid(&model);
+    pyramid.draw();*/
 
     glutSwapBuffers();
 }
