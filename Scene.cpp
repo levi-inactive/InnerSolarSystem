@@ -2,6 +2,8 @@
 
 #include "Sphere.h"
 #include "Pyramid.h"
+#include "SpaceShip.h"
+#include "Earth.h"
 
 /********************
  * private:
@@ -13,7 +15,7 @@ void Scene::init() {
     glOrtho(-4, 4, -4, 4, -4, 4);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    gluLookAt(1, 1, 1, 0, 0, 0, 0, 1, 0);
+    gluLookAt(1, 1, 0.5, 0, 0, 0, 0, 1, 0);
     glClearColor(0, 0, 0, 0);
 }
 
@@ -26,9 +28,9 @@ void Scene::display() {
 
     model.push();
         glColor3f(1.0, 0.5, 0.0);
-        Sphere sun(&model);
+        Earth earth(&model);
         //sun.deltaTheta = 0.2;
-        sun.draw();
+        earth.draw();
 
         model.push();
             model.translate(2, 0, 0);
@@ -50,8 +52,8 @@ void Scene::display() {
             model.translate(4, 0, 0);
             model.scale(0.5, 0.5, 0.5);
             glColor3f(0.0, 0.2, 1.0);
-            Sphere earth(&model);
-            earth.draw();
+            Sphere earth1(&model);
+            earth1.draw();
 
             model.push();
                 model.translate(1, 0, 0);
@@ -86,6 +88,7 @@ void Scene::display() {
 
     /*Pyramid pyramid(&model);
     pyramid.draw();*/
+
 
     glutSwapBuffers();
 }

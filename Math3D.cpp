@@ -93,6 +93,105 @@ void Math3D::rotate(float theta, Point p1, Point p2) {
   translate(p1.x, p1.y, p1.z);
 }
 
+void Math3D::rotateLibre(float theta, float p1[3], float p2[3]){
+
+    float R[ROWS][COLS];
+
+    //DIFERENCIAS
+    float dX = p2[0]-p1[0];
+    float dY = p2[1]-p1[1];
+    float dZ = p2[2]-p1[2];
+
+    //V
+    float V = this->getMagnitudR3(dX, dY, dZ);
+
+    float a = dX/V;
+    float b = dY/V;
+    float c = dZ/V;
+    float d = this->getMagnitudR2(b, c);
+
+    float t = DegToRad(theta);
+
+    translate (-p1[0], -p1[1] , -p1[2]);
+
+    //A
+    loadIdentity (R);
+    R[1][1]=c/d;
+    R[1][2]=-b/d;
+    R[2][1]=b/d;
+    R[2][2]=c/d;
+    operate(R);
+
+    //B
+    loadIdentity (R);
+
+    R[0][0]=d;
+    R[0][2]=a;
+    R[2][0]=-a;
+    R[2][2]=d;
+    operate(R);
+
+    //T
+    loadIdentity (R) ;
+
+    R[0][0]=R[1][1]=cos (t);
+    R[1][0]=sin (t);
+    R[0][1]=-R[1][0];
+    operate(R);
+
+    //B'
+    loadIdentity(R);
+
+    R[0][0]=d;
+    R[0][2]=-a;
+    R[2][0]=a;
+    R[2][2]=d;
+
+    operate(R);
+
+    //A'
+
+    loadIdentity (R);
+    R[1][1]=c/d;
+    R[1][2]=b/d;
+    R[2][1]=-b/d;
+    R[2][2]=c/d;
+
+    operate(R);
+
+    loadIdentity (R);
+
+    R[0][3]=p1[0];
+    R[1][3]=p1[1];
+    R[2][3]=p1[2];
+
+    operate(R);
+
+
+}
+
+float Math3D::getMagnitudR3(float termino1, float termino2, float termino3){
+
+    return sqrt((termino1*termino1)+(termino2*termino2)+(termino3*termino3));
+
+}
+
+float Math3D::RadToDeg(float r)
+{
+      return ((180*r)/M_PI);
+}
+
+float Math3D::DegToRad(float g)
+{
+      return ((g*M_PI)/180);
+}
+
+float Math3D::getMagnitudR2(float termino1, float termino2){
+
+    return sqrt((termino1*termino1)+(termino2*termino2));
+
+}
+
 void Math3D::operate(float inputMatrix[][4]) {
   float tmp[4][4];
   int i, j, k;

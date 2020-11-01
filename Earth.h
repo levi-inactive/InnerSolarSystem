@@ -1,9 +1,13 @@
 #ifndef Earth_h
 #define Earth_h
 
-#include "Planet.h"
+#include "Drawable.h"
 
-class Earth : public Planet {
+class Earth : public Drawable {
+
+    public:
+        Earth(Math3D*);
+        void draw();
 
 };
 

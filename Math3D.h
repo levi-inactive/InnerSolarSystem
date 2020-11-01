@@ -36,6 +36,11 @@ public:
     void rotateY(float theta);
     void rotateZ(float theta);
     void rotate(float theta, Point p1, Point p2);
+    void rotateLibre(float theta, float p1[3], float p2[3]);
+    float getMagnitudR2(float termino1, float termino2);
+    float getMagnitudR3(float termino1, float termino2, float termino3);
+    float RadToDeg(float r);
+    float DegToRad(float g);
 
     /* Multiplies inputMatrix with matrix.M. */
     void operate(float inputMatrix[][4]);
