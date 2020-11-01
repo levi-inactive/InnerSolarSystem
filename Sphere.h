@@ -2,6 +2,7 @@
 #define Sphere_h
 
 #include "Drawable.h"
+#include "Point.h"
 
 class Sphere : public Drawable {
 public:

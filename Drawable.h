@@ -14,6 +14,21 @@
 
 class Drawable {
 public:
+    /* Translation control variables. */
+    float deltaX = 0;
+    float deltaY = 0;
+    float deltaZ = 0;
+
+    /* Escalation control variables. */
+    float deltaWidth;
+    float deltaHeight;
+    float deltaDepth;
+
+    /* Rotation control variables. */
+    char rotationMode = 'g';
+    Point rotationAxis[2] = {Point(0, 0, 0), Point(0, 0, 1)};
+    float deltaTheta = 0;
+
     void loadIdentity(float M[][4]);
     Matrix matrix;
     Math3D* model;

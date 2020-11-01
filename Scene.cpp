@@ -27,6 +27,7 @@ void Scene::display() {
     model.push();
         glColor3f(1.0, 0.5, 0.0);
         Sphere sun(&model);
+        //sun.deltaTheta = 0.2;
         sun.draw();
 
         model.push();
@@ -63,10 +64,16 @@ void Scene::display() {
 
             model.push();
                 model.translate(1, 0, 0);
-                model.rotateX(60);
+
                 glColor3f(1.0, 1.0, 0.5);
-                Pyramid py(&model);
-                py.draw();
+                Pyramid py1(&model);
+                //py1.deltaX = -0.2;
+                py1.draw();
+
+                model.rotate(3.14, Point(1, 1, 1), Point(2, 2, 2));
+                glColor3f(0.0, 1.0, 0.0);
+                Pyramid py2(&model);
+                py2.draw();
             model.pop();
 
 
@@ -74,7 +81,7 @@ void Scene::display() {
 
     model.pop();
 
-    /*Sphere sphere;
+    /*Sphere sphere(&model);
     sphere.draw();*/
 
     /*Pyramid pyramid(&model);

@@ -34,16 +34,16 @@ void Drawable::updatePoint(Point* p) {
     Point tmp;
 
     /* Update point with internal model matrix. */
-    tmp.x = matrix.M[0][0] * p->x 
-          + matrix.M[0][1] * p->y 
-          + matrix.M[0][2] * p->z 
+    tmp.x = matrix.M[0][0] * p->x
+          + matrix.M[0][1] * p->y
+          + matrix.M[0][2] * p->z
           + matrix.M[0][3] * p->a;
-    tmp.y = matrix.M[1][0] * p->x 
-          + matrix.M[1][1] * p->y 
+    tmp.y = matrix.M[1][0] * p->x
+          + matrix.M[1][1] * p->y
           + matrix.M[1][2] * p->z
           + matrix.M[1][3] * p->a;
-    tmp.z = matrix.M[2][0] * p->x 
-          + matrix.M[2][1] * p->y 
+    tmp.z = matrix.M[2][0] * p->x
+          + matrix.M[2][1] * p->y
           + matrix.M[2][2] * p->z
           + matrix.M[2][3] * p->a;
     tmp.a = matrix.M[3][0] * p->x
@@ -57,16 +57,16 @@ void Drawable::updatePoint(Point* p) {
     p->a = tmp.a;
 
     /* Update point with global model matrix. */
-    tmp.x = model->matrix.M[0][0] * p->x 
-          + model->matrix.M[0][1] * p->y 
+    tmp.x = model->matrix.M[0][0] * p->x
+          + model->matrix.M[0][1] * p->y
           + model->matrix.M[0][2] * p->z
           + model->matrix.M[0][3] * p->a;
-    tmp.y = model->matrix.M[1][0] * p->x 
-          + model->matrix.M[1][1] * p->y 
+    tmp.y = model->matrix.M[1][0] * p->x
+          + model->matrix.M[1][1] * p->y
           + model->matrix.M[1][2] * p->z
           + model->matrix.M[1][3] * p->a;
-    tmp.z = model->matrix.M[2][0] * p->x 
-          + model->matrix.M[2][1] * p->y 
+    tmp.z = model->matrix.M[2][0] * p->x
+          + model->matrix.M[2][1] * p->y
           + model->matrix.M[2][2] * p->z
           + model->matrix.M[2][3] * p->a;
     tmp.a = model->matrix.M[3][0] * p->x

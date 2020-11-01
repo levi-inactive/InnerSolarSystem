@@ -2,6 +2,8 @@
 
 using namespace std;
 
+Pyramid::Pyramid() {}
+
 Pyramid:: Pyramid(Math3D* _model){
     model = _model;
     loadIdentity(matrix.M);

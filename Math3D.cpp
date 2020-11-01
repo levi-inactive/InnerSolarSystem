@@ -20,46 +20,77 @@ void Math3D::loadIdentity(float M[][4]) {
 }
 
 void Math3D::translate(float x, float y, float z) {
-  loadIdentity(T);
-  T[0][3] = x;
-  T[1][3] = y;
-  T[2][3] = z;
-  operate(T);
+  float translationMatrix[ROWS][COLS];
+  loadIdentity(translationMatrix);
+  translationMatrix[0][3] = x;
+  translationMatrix[1][3] = y;
+  translationMatrix[2][3] = z;
+  operate(translationMatrix);
 }
 
 void Math3D::scale(float x, float y, float z) {
-  loadIdentity(E);
-  E[0][0] = x;
-  E[1][1] = y;
-  E[2][2] = z;
-  operate(E);
+  float scalationMatrix[ROWS][COLS];
+  loadIdentity(scalationMatrix);
+  scalationMatrix[0][0] = x;
+  scalationMatrix[1][1] = y;
+  scalationMatrix[2][2] = z;
+  operate(scalationMatrix);
 }
 
 void Math3D::rotateX(float theta) {
-  loadIdentity(R);
-  R[1][1] = cos(theta);
-  R[1][2] = -sin(theta);
-  R[2][1] = sin(theta);
-  R[2][2] = cos(theta);
-  operate(R);
+  float rotationMatrix[ROWS][COLS];
+  loadIdentity(rotationMatrix);
+  rotationMatrix[1][1] = cos(theta);
+  rotationMatrix[1][2] = -sin(theta);
+  rotationMatrix[2][1] = sin(theta);
+  rotationMatrix[2][2] = cos(theta);
+  operate(rotationMatrix);
 }
 
 void Math3D::rotateY(float theta) {
-  loadIdentity(R);
-  R[0][0] = cos(theta);
-  R[0][2] = sin(theta);
-  R[2][0] = -sin(theta);
-  R[2][2] = cos(theta);
-  operate(R);
+  float rotationMatrix[ROWS][COLS];
+  loadIdentity(rotationMatrix);
+  rotationMatrix[0][0] = cos(theta);
+  rotationMatrix[0][2] = sin(theta);
+  rotationMatrix[2][0] = -sin(theta);
+  rotationMatrix[2][2] = cos(theta);
+  operate(rotationMatrix);
 }
 
 void Math3D::rotateZ(float theta) {
-  loadIdentity(R);
-  R[0][0] = cos(theta);
-  R[0][1] = -sin(theta);
-  R[1][0] = sin(theta);
-  R[1][1] = cos(theta);
-  operate(R);
+  float rotationMatrix[ROWS][COLS];
+  loadIdentity(rotationMatrix);
+  rotationMatrix[0][0] = cos(theta);
+  rotationMatrix[0][1] = -sin(theta);
+  rotationMatrix[1][0] = sin(theta);
+  rotationMatrix[1][1] = cos(theta);
+  operate(rotationMatrix);
+}
+
+void Math3D::rotate(float theta, Point p1, Point p2) {
+  /* 1. Translate a point of the rotation axis to the origin. */
+  translate(-p1.x, -p1.y, -p1.z);
+
+  /* 2. Rotate to meet Z axis. */
+  float componentX = p2.x - p1.x;
+  float componentY = p2.y - p1.y;
+  float componentZ = p2.z - p1.z;
+
+  float alpha = atan(componentY / componentZ);
+  rotateX(alpha);
+
+  float beta = atan(componentX / componentZ);
+  rotateY(beta);
+
+  /* 3. Rotate along Z axis. */
+  rotateZ(theta);
+
+  /* 4. Rotate back to original orientation. */
+  rotateY(-beta);
+  rotateX(-alpha);
+
+  /* 5. Translate back to original position. */
+  translate(p1.x, p1.y, p1.z);
 }
 
 void Math3D::operate(float inputMatrix[][4]) {
@@ -79,31 +110,6 @@ void Math3D::operate(float inputMatrix[][4]) {
     for(j = 0; j < 4; j++) {
       matrix.M[i][j] = tmp[i][j];
     }
-  }
-}
-
-void Math3D::MatPoint(float M[][4], float p[3]) {
-  float tmp[4];
-  int i, j;
-  
-  for(i = 0; i < 3; i++) { 
-    tmp[i] = p[i];
-    p[i] = 0;
-  }
-
-  tmp[3]=1;
-  for(i = 0; i < 3; i++) {
-    for(j = 0; j < 4; j++) {
-      p[i] += M[i][j] * tmp[j];
-    }
-  }
-}
-
-//Multiplica la matriz m por cada punto del objeto definido por la matriz p de size x 3
-void Math3D::MatObject(float M[][4], int size, float p[][3]) {
-  int i;
-  for(i = 0; i < size; i++) {
-    MatPoint(M, p[i]);
   }
 }
 
