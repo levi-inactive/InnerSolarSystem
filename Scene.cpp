@@ -23,10 +23,11 @@ void Scene::display() {
     Math3D model;
 
     glClear(GL_COLOR_BUFFER_BIT);
-    drawAxis();
+    //drawAxis();
     glFlush();
 
     model.push();
+
         glColor3f(1.0, 0.5, 0.0);
         Earth earth(&model);
         //sun.deltaTheta = 0.2;
@@ -72,10 +73,17 @@ void Scene::display() {
                 //py1.deltaX = -0.2;
                 py1.draw();
 
+
                 model.rotate(3.14, Point(1, 1, 1), Point(2, 2, 2));
                 glColor3f(0.0, 1.0, 0.0);
                 Pyramid py2(&model);
                 py2.draw();
+            model.pop();
+
+            model.push();
+                glColor3f(1.0, 1.0, 1.0);
+                SpaceShip sp(&model);
+                sp.draw();
             model.pop();
 
 
