@@ -28,7 +28,7 @@ void Scene::display() {
 
     model.push();
 
-        glColor3f(1.0, 0.5, 0.0);
+       /* glColor3f(1.0, 0.5, 0.0);
         Earth earth(&model);
         //sun.deltaTheta = 0.2;
         earth.draw();
@@ -78,7 +78,7 @@ void Scene::display() {
                 glColor3f(0.0, 1.0, 0.0);
                 Pyramid py2(&model);
                 py2.draw();
-            model.pop();
+            model.pop();*/
 
             model.push();
                 glColor3f(1.0, 1.0, 1.0);
@@ -87,7 +87,7 @@ void Scene::display() {
             model.pop();
 
 
-        model.pop();
+        //model.pop();
 
     model.pop();
 
